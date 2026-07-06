@@ -1,0 +1,142 @@
+/* assets/css/forms.css */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+}
+
+.auth-box {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: #7f8c8d;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ecf0f1;
+}
+
+.auth-footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+.current-image {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.current-image img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 4px;
+}
+
+.current-image p {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Radio buttons and checkboxes */
+.form-group-radio {
+    display: flex;
+    gap: 2rem;
+    padding: 0.5rem 0;
+}
+
+.form-group-radio label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.form-group-radio input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* File input styling */
+input[type="file"] {
+    padding: 0.5rem 0;
+    border: none;
+    background: transparent;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #2980b9;
+}
+
+/* Small text helper */
+.form-group small {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
