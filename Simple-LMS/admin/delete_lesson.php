@@ -17,7 +17,13 @@ if ($lesson_id <= 0 || $course_id <= 0) {
 
 $db = Database::getInstance();
 
-// Delete the lesson (cascade will handle progress records)
+// First, delete lesson progress records
+$stmt = $db->prepare("DELETE FROM lesson_progress WHERE lesson_id = ?");
+$stmt->bind_param("i", $lesson_id);
+$stmt->execute();
+$stmt->close();
+
+// Then delete the lesson
 $stmt = $db->prepare("DELETE FROM lessons WHERE id = ? AND course_id = ?");
 $stmt->bind_param("ii", $lesson_id, $course_id);
 

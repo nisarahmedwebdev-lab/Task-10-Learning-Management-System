@@ -8,7 +8,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'lms');
 
 // Application configuration
-define('APP_NAME', 'Simple LMS');
+define('APP_NAME', 'TEC LMS');
 
 // Get the correct base URL dynamically
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';

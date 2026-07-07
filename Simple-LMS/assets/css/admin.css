@@ -1,10 +1,16 @@
-/* assets/css/admin.css */
+/* ==================== ADMIN PANEL CSS ==================== */
+/* This file ONLY affects admin pages */
+
+/* ===== Admin Layout ===== */
+.admin-dashboard {
+    padding: 20px 0;
+}
 
 .admin-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -12,10 +18,17 @@
 .admin-header h1 {
     font-size: 2rem;
     color: #2c3e50;
+    margin: 0;
+}
+
+.admin-header h1 i {
+    color: #3498db;
+    margin-right: 10px;
 }
 
 .admin-header p {
     color: #7f8c8d;
+    margin: 5px 0 0 0;
 }
 
 .header-actions {
@@ -24,95 +37,362 @@
     flex-wrap: wrap;
 }
 
-.stats-grid {
+/* ===== Stats Grid ===== */
+.admin-stats-grid {
     display: grid;
-    gap: 2rem;
-    margin: 2rem 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 20px 0 30px 0;
 }
 
-.stat-card {
+.admin-stat-card {
     background: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 15px;
+    transition: all 0.3s ease;
 }
 
-.stat-icon {
-    font-size: 2.5rem;
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-.stat-content h3 {
-    font-size: 2rem;
+.admin-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.admin-stat-content h3 {
+    font-size: 24px;
+    margin: 0 0 2px 0;
     color: #2c3e50;
-    margin-bottom: 0.25rem;
 }
 
-.stat-content p {
-    color: #7f8c8d;
+.admin-stat-content p {
     margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
 }
 
+/* ===== Quick Actions ===== */
 .admin-actions {
     margin: 2rem 0;
 }
 
 .admin-actions h2 {
     margin-bottom: 1.5rem;
+    font-size: 22px;
+    color: #2c3e50;
 }
 
-.action-grid {
+.admin-actions h2 i {
+    color: #3498db;
+    margin-right: 10px;
+}
+
+.admin-action-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
-.action-card {
+.admin-action-card {
     background: #fff;
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     text-decoration: none;
     color: #333;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
     text-align: center;
 }
 
-.action-card:hover {
+.admin-action-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-.action-icon {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: 0.5rem;
+.admin-action-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 28px;
+    color: #fff;
 }
 
-.action-card h3 {
-    margin-bottom: 0.5rem;
+.admin-action-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
 }
 
-.action-card p {
+.admin-action-card p {
     color: #7f8c8d;
     margin: 0;
+    font-size: 14px;
 }
 
-.recent-activity {
+/* ===== Recent Activity ===== */
+.admin-recent-activity {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     margin: 2rem 0;
 }
 
-.recent-activity h2 {
+.admin-recent-activity h2 {
     margin-bottom: 1.5rem;
+    font-size: 22px;
+    color: #2c3e50;
 }
 
-.course-info-banner {
+.admin-recent-activity h2 i {
+    color: #3498db;
+    margin-right: 10px;
+}
+
+/* ===== Table Toolbar ===== */
+.admin-table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-search-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 15px;
+    flex: 1;
+    max-width: 350px;
+}
+
+.admin-search-box i {
+    color: #999;
+    margin-right: 10px;
+}
+
+.admin-search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+.admin-table-info {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.admin-table-info strong {
+    color: #2c3e50;
+}
+
+/* ===== Course Info Banner ===== */
+.admin-course-info-banner {
     background: #ecf0f1;
     padding: 1rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 8px;
     margin: 1rem 0 2rem 0;
 }
 
-.course-info-banner h2 {
+.admin-course-info-banner h2 {
     color: #2c3e50;
+    margin: 0;
+    font-size: 18px;
+}
+
+.admin-course-info-banner i {
+    color: #3498db;
+    margin-right: 10px;
+}
+
+/* ===== Form Container ===== */
+.admin-form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.admin-form-container h1 {
+    margin-bottom: 0.5rem;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+.admin-form-container h1 i {
+    color: #3498db;
+    margin-right: 10px;
+}
+
+.admin-form-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.admin-form-actions .btn {
+    flex: 1;
+}
+
+/* ===== Current Image Preview ===== */
+.admin-current-image {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.admin-current-image img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.admin-current-image p {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ===== Badges ===== */
+.admin-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.admin-badge-info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.admin-badge-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.admin-badge-danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.admin-badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.admin-badge-primary {
+    background: #cce5ff;
+    color: #004085;
+}
+
+/* ===== Action Buttons ===== */
+.admin-action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+/* ===== Empty State ===== */
+.admin-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.admin-empty-state i {
+    display: block;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.admin-empty-state p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* ===== Responsive Admin ===== */
+@media (max-width: 1024px) {
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-action-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-form-container {
+        padding: 1rem;
+    }
+    
+    .admin-form-actions {
+        flex-direction: column;
+    }
+    
+    .admin-table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .admin-search-box {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-stat-card {
+        padding: 15px;
+    }
+    
+    .admin-stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .admin-stat-content h3 {
+        font-size: 20px;
+    }
 }

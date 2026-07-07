@@ -5,6 +5,7 @@ require_once __DIR__ . '/../config/session.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/upload.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 checkAdmin();
 
@@ -47,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $upload_result = uploadFile($_FILES['image'], 'courses');
         if ($upload_result['success']) {
-            // Delete old image if exists
             if ($image && $image !== 'default-course.jpg') {
                 deleteFile($image, 'courses');
             }
@@ -80,54 +80,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title = ($action === 'add' ? 'Add' : 'Edit') . ' Course';
 include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/navbar.php';
+include __DIR__ . '/includes/sidebar.php';
 ?>
 
-<div class="container">
-    <div class="form-container">
-        <h1><?php echo $page_title; ?></h1>
-        
-        <?php if (!empty($errors['general'])): ?>
-            <div class="alert alert-error"><?php echo htmlspecialchars($errors['general']); ?></div>
-        <?php endif; ?>
-        
-        <form method="POST" action="" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">Course Title</label>
-                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($course['title'] ?? $_POST['title'] ?? ''); ?>" required>
-                <?php if (!empty($errors['title'])): ?>
-                    <span class="error-message"><?php echo htmlspecialchars($errors['title']); ?></span>
-                <?php endif; ?>
+<div class="admin-dashboard">
+    <div class="container">
+        <div class="admin-form-container">
+            <h1><i class="fas fa-<?php echo $action === 'add' ? 'plus-circle' : 'edit'; ?>"></i> <?php echo $page_title; ?></h1>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                <p class="admin-form-subtitle">Fill in the course details below</p>
+                <a href="courses.php" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Courses
+                </a>
             </div>
             
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="5" required><?php echo htmlspecialchars($course['description'] ?? $_POST['description'] ?? ''); ?></textarea>
-                <?php if (!empty($errors['description'])): ?>
-                    <span class="error-message"><?php echo htmlspecialchars($errors['description']); ?></span>
-                <?php endif; ?>
-            </div>
+            <?php if (!empty($errors['general'])): ?>
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <?php echo htmlspecialchars($errors['general']); ?>
+                </div>
+            <?php endif; ?>
             
-            <div class="form-group">
-                <label for="image">Course Image</label>
-                <?php if ($action === 'edit' && !empty($course['image'])): ?>
-                    <div class="current-image">
-                        <img src="<?php echo UPLOAD_URL . 'courses/' . $course['image']; ?>" alt="Current image">
-                        <p>Current image</p>
-                    </div>
-                <?php endif; ?>
-                <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png">
-                <small>Allowed: JPG, JPEG, PNG (Max 2MB)</small>
-                <?php if (!empty($errors['image'])): ?>
-                    <span class="error-message"><?php echo htmlspecialchars($errors['image']); ?></span>
-                <?php endif; ?>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Save Course</button>
-                <a href="courses.php" class="btn btn-secondary">Cancel</a>
-            </div>
-        </form>
+            <form method="POST" action="" enctype="multipart/form-data" id="courseForm">
+                <div class="form-group">
+                    <label for="title">
+                        <i class="fas fa-heading"></i> Course Title <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($course['title'] ?? $_POST['title'] ?? ''); ?>" placeholder="Enter course title" required>
+                    <?php if (!empty($errors['title'])): ?>
+                        <span class="error-message"><i class="fas fa-exclamation-circle"></i> <?php echo htmlspecialchars($errors['title']); ?></span>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">
+                        <i class="fas fa-align-left"></i> Description <span class="text-danger">*</span>
+                    </label>
+                    <textarea id="description" name="description" rows="6" placeholder="Enter course description" required><?php echo htmlspecialchars($course['description'] ?? $_POST['description'] ?? ''); ?></textarea>
+                    <?php if (!empty($errors['description'])): ?>
+                        <span class="error-message"><i class="fas fa-exclamation-circle"></i> <?php echo htmlspecialchars($errors['description']); ?></span>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="form-group">
+                    <label for="image">
+                        <i class="fas fa-image"></i> Course Image
+                    </label>
+                    <?php if ($action === 'edit' && !empty($course['image'])): ?>
+                        <div class="admin-current-image">
+                            <img src="<?php echo getCourseImage($course['image']); ?>" alt="Current image">
+                            <p><i class="fas fa-info-circle"></i> Current image</p>
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png">
+                    <small><i class="fas fa-info-circle"></i> Allowed: JPG, JPEG, PNG (Max 2MB)</small>
+                    <?php if (!empty($errors['image'])): ?>
+                        <span class="error-message"><i class="fas fa-exclamation-circle"></i> <?php echo htmlspecialchars($errors['image']); ?></span>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="admin-form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Course
+                    </button>
+                    <a href="courses.php" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<style>
+.text-danger {
+    color: #e74c3c;
+}
+</style>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
