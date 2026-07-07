@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE IF NOT EXISTS lms;
 USE lms;
 
