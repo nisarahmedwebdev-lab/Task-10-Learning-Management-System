@@ -8,8 +8,12 @@
         </div>
     </footer>
     
+    <!-- SweetAlert Helper -->
+    <script src="<?php echo $base_path ?? ''; ?>assets/js/sweetalert-helper.js"></script>
+    <script src="<?php echo $base_path ?? ''; ?>assets/js/global-sweetalert.js"></script>
+    
     <?php if (isset($extra_js)): ?>
-        <script src="<?php echo APP_URL . $extra_js; ?>"></script>
+        <script src="<?php echo $base_path ?? '' . $extra_js; ?>"></script>
     <?php endif; ?>
 </body>
 </html>
